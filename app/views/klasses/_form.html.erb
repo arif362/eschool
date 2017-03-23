@@ -1,0 +1,29 @@
+<%= form_for @klass do |f| %>
+    <div class="form-group">
+      <%= f.label :time %>
+      <%= f.text_field :time , class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label :course %>
+      <%= f.select :course, Course::COURSE_NAMES,prompt:'Select a Course', class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label :room_no %>
+      <%= f.text_field :room_no , class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label :place %>
+      <%= f.text_area :place, class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label :teacher %>
+      <%= f.text_field :teacher , class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.label :duration %>
+      <%= f.text_field :duration , class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= f.submit  class: 'btn btn-default'%>
+    </div>
+<% end %>

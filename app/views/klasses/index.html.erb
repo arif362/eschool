@@ -1,0 +1,40 @@
+<div class="container">
+  <h2 class="page-header">Class Routine</h2>
+  <%= link_to 'Create Class', new_klass_path, class: 'fa fa-plus-circle btn btn-default' %>
+  <b><%= notice %></b>
+  <table class="table table-responsive">
+    <thead>
+    <tr>
+      <th>Serial No.</th>
+      <th>Course Name</th>
+      <th>Place</th>
+      <th>Room No.</th>
+      <th>Time</th>
+      <th>Teacher</th>
+      <th>Duration</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% serial_no =0 %>
+    <% @klasses.each do |klass| %>
+        <% serial_no += 1 %>
+        <tr>
+          <td><%= serial_no %></td>
+          <td><%= klass.course %></td>
+          <td><%= klass.place %></td>
+          <td><%= klass.room_no %></td>
+          <td><%= klass.time %></td>
+          <td><%= klass.teacher %></td>
+          <td><%= klass.duration %></td>
+          <td>
+            <%= link_to '', klass_path(klass), class: 'fa fa-eye ', title: 'View' %>
+            <%= link_to '', edit_klass_path(klass), class: 'fa fa-edit', title: 'Edit' %>
+            <%= link_to '', klass_path(klass), method: :delete, class: 'fa fa-trash-o', title: 'Delete' %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Back to Course list', courses_path %>
+</div>

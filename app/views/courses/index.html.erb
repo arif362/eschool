@@ -1,0 +1,35 @@
+<div class="container">
+  <h2 class="page-header">Course List </h2>
+  <div>
+    <%= link_to 'New Course', new_course_path, class: 'fa fa-plus-circle btn btn-default', title: 'Add New Course' %>
+  </div>
+  <%= notice %>
+  <table class="table table-responsive">
+    <thead>
+    <tr>
+      <th>Serial</th>
+      <th>Course Title</th>
+      <th>Author of Course</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% serial_no=0 %>
+    <% @courses.each do |course| %>
+        <% serial_no +=1 %>
+        <tr>
+          <td><%= serial_no %></td>
+          <td><%= course.title %></td>
+          <td><%= course.author %></td>
+          <td>
+            <%= link_to '', course_path(course), class: 'fa fa-eye', title: 'View' %>
+            <%= link_to '', edit_course_path(course), class: 'fa fa-edit', title: 'Edit' %>
+            <%= link_to '', course_path(course), method: :delete, class: 'fa fa-trash-o', title: 'Delete' %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @courses , class: 'pull-right'%>
+  <%= link_to 'Back to Class Routine', klasses_path%>
+</div>
