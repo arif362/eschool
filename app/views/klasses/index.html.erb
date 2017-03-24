@@ -11,6 +11,7 @@
       <th>Room No.</th>
       <th>Time</th>
       <th>Teacher</th>
+      <th>E-mail</th>
       <th>Duration</th>
       <th>Action</th>
     </tr>
@@ -26,6 +27,7 @@
           <td><%= klass.room_no %></td>
           <td><%= klass.time %></td>
           <td><%= klass.teacher %></td>
+          <td><%= klass.email %></td>
           <td><%= klass.duration %></td>
           <td>
             <%= link_to '', klass_path(klass), class: 'fa fa-eye ', title: 'View' %>

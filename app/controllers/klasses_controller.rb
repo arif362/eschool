@@ -13,7 +13,8 @@ class KlassesController < ApplicationController
     @klass = Klass.new(klass_params)
     respond_to do |format|
       if @klass.save
-        format.html { redirect_to klasses_path, notice: 'Class created successfully' }
+        KlassNotification.klass_created(@klass).deliver_now
+        format.html { redirect_to courses_path, notice: 'Notification has been sent to your Mail. Check Your Gmail to confirm the operation' }
       end
     end
   end
@@ -44,6 +45,6 @@ class KlassesController < ApplicationController
   end
 
   def klass_params
-    params.require(:klass).permit(:time, :course, :room_no, :place, :teacher, :duration)
+    params.require(:klass).permit(:time, :course, :room_no, :place, :teacher, :email, :duration)
   end
 end

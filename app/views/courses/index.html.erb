@@ -9,6 +9,7 @@
     <tr>
       <th>Serial</th>
       <th>Course Title</th>
+      <th></th>
       <th>Author of Course</th>
       <th>Action</th>
     </tr>
@@ -20,6 +21,7 @@
         <tr>
           <td><%= serial_no %></td>
           <td><%= course.title %></td>
+          <td><%= link_to 'create a class', new_klass_path%></td>
           <td><%= course.author %></td>
           <td>
             <%= link_to '', course_path(course), class: 'fa fa-eye', title: 'View' %>

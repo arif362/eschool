@@ -6,6 +6,8 @@ Rails.application.routes.draw do
    root 'courses#index'
   resources :courses
   resources :klasses
+  resources :course_klass_lists
+  resources :schools
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

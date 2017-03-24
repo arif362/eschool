@@ -1,0 +1,13 @@
+<%= form_for @course_klass_list do |f|%>
+    <div class="field">
+      <%= f.label :course_id%>
+      <%= f.text_field :course_id%>
+    </div>
+    <div class="field">
+      <%= f.label :klass_id%>
+      <%= f.text_field :klass_id%>
+    </div>
+    <div class="action">
+      <%= f.submit %>
+    </div>
+<% end %>
