@@ -1,0 +1,5 @@
+<div class="container">
+  <h2 class="page-header"> Hello <%= @user.first_name %></h2>
+  <p>You are invited to E-school. please sign up with the link below.</p>
+  <%= button_to 'Click Here to Sign Up', new_user_url, method: :get, class: 'btn btn-default'%>
+</div>

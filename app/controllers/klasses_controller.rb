@@ -1,4 +1,5 @@
 class KlassesController < ApplicationController
+  skip_before_filter :authorize
   before_action :set_klass, only: [:show, :edit, :update, :destroy]
 
   def index

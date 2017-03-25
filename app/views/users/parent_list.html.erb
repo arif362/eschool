@@ -1,0 +1,33 @@
+<div class="container">
+  <h2 class="page-header">All Parents List</h2>
+  <%= link_to 'Students List', student_list_users_path, class:'btn btn-default' %>
+  <%= link_to 'Teachers List', teacher_list_users_path, class: 'btn btn-default' %>
+  <%= link_to 'Parents List', parent_list_users_path, class: 'btn btn-default' %>
+  <%= link_to 'All Users List', users_path, class: 'btn btn-default' %>
+  <table class="table table-responsive">
+    <thead>
+    <tr>
+      <th>Serial No.</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @parents.each do |parent| %>
+        <tr>
+          <td><%= parent.id %></td>
+          <td><%= parent.first_name %></td>
+          <td><%= parent.email %></td>
+          <td><%= parent.role %></td>
+          <td>
+            <%= link_to '', user_path(parent), class: 'fa fa-eye' %>
+            <%= link_to '', edit_user_path(parent), class: 'fa fa-edit' %>
+            <%= link_to '', user_path(parent), method: :delete, class: 'fa fa-trash-o' %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

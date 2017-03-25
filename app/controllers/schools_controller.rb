@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  skip_before_filter :authorize
   before_action :set_school, only: [:show]
   def index
     @schools=School.all
@@ -10,7 +11,8 @@ class SchoolsController < ApplicationController
     @school = School.new(school_params)
     respond_to do |format|
       if @school.save
-        format.html {redirect_to schools_path, notice: 'You have created a School Successfully'}
+        KlassNotification.school_created(@school).deliver
+        format.html {redirect_to @school, notice: 'A Confirmation Message sent to your Gmail Account. Please Check'}
       end
     end
   end
@@ -24,6 +26,6 @@ class SchoolsController < ApplicationController
   end
 
   def school_params
-    params.require(:school).permit(:name,:address,:registration_no,:country,:admin,:email,:mobile)
+    params.require(:school).permit(:name,:address,:registration_no,:country,:admin,:email,:password,:password_confirmation,:mobile)
   end
 end

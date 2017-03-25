@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  skip_before_filter :authorize
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
