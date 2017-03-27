@@ -7,11 +7,12 @@ class UsersController < ApplicationController
   end
 
   def student_list
-    @users= User.all.where("role='Student'")
+    @users= User.all.where(role: User::USER_ROLE[:student])
   end
 
   def teacher_list
-    @users=User.all.where("role='Teacher'")
+   # @users=User.all.where(role: 'Teacher')
+    @users=User.all.where(role: User::USER_ROLE[:teacher])
   end
 
   def parent_list
@@ -60,7 +61,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :user_name, :email, :role, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :user_name, :email, :role, :password,:school_id, :password_confirmation)
   end
 
   def set_user

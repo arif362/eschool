@@ -16,9 +16,10 @@
     </tr>
     </thead>
     <tbody>
+    <% serial_no=0%>
     <% @users.each do |user| %>
         <tr>
-          <td><%= user.id %></td>
+          <td><%= serial_no +=1 %></td>
           <td><%= user.full_name %></td>
           <td><%= user.email %></td>
           <td><%= user.role %></td>

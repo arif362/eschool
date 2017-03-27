@@ -11,7 +11,8 @@ class KlassesController < ApplicationController
   end
 
   def create
-    @klass = Klass.new(klass_params)
+    #course=Course.find(params[:course_id])
+    @klass =current_school.course.klasses.build(klass_params)
     respond_to do |format|
       if @klass.save
         KlassNotification.klass_created(@klass).deliver_now

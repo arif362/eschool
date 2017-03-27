@@ -3,8 +3,8 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
-    @courses=Course.all
-    @courses=Course.paginate(:page=> params[:page], :per_page=> 10)
+    @courses= Course.all
+    @courses=Course.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new
@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(course_params)
+    @course = current_school.courses.build(course_params)
     respond_to do |format|
       if @course.save
         format.html { redirect_to courses_path, notice: 'New course added successfully' }
@@ -39,7 +39,7 @@ class CoursesController < ApplicationController
   def destroy
     respond_to do |format|
       if @course.destroy
-        format.html { redirect_to courses_path, confirm:'Do you realy delete this course?'  }
+        format.html { redirect_to courses_path, confirm: 'Do you realy delete this course?' }
       end
     end
   end

@@ -15,9 +15,10 @@
     </tr>
     </thead>
     <tbody>
+    <% serial_no=0%>
     <% @parents.each do |parent| %>
         <tr>
-          <td><%= parent.id %></td>
+          <td><%= serial_no +=1 %></td>
           <td><%= parent.first_name %></td>
           <td><%= parent.email %></td>
           <td><%= parent.role %></td>

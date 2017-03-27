@@ -17,9 +17,10 @@
     </tr>
     </thead>
     <tbody>
+    <% index=0 %>
     <% @users.each do |user| %>
         <tr>
-          <td><%= user.id %></td>
+          <td><%= index +=1 %></td>
           <td><%= user.full_name %></td>
           <td><%= user.email %></td>
           <td><%= user.role %></td>

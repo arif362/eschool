@@ -14,6 +14,23 @@ class ApplicationController < ActionController::Base
     klass
   end
 
+  def current_school
+    School.find(session[:school_id])
+  rescue ActiveRecord::RecordNotFound
+    school = School.find(params[:id])
+    session[:school_id]=school.id
+  end
+
+  def current_course
+    Course.find(session[:course_id])
+  rescue ActiveRecord::RecordNotFound
+  end
+  def current_user
+    User.find(session[:user_id])
+    rescue ActiveRecord::RecordNotFound
+  end
+
+
   def authorize
     if School.find_by_id(session[:school_id])
       redirect_to school_path

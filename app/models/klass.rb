@@ -1,3 +1,5 @@
 class Klass < ActiveRecord::Base
-  has_many :course_klass_lists
+  belongs_to :school
+  belongs_to :course
+  belongs_to :user
 end

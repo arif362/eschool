@@ -20,12 +20,16 @@
       <%= f.select :role, User::USER_ROLE, prompt:'Select Your Role' %>
     </div>
     <div class="form-group">
+      <%= f.label :school %>
+      <%= f.select :school_id, School::USER_SCHOOL, prompt:'Select Your School' %>
+    </div>
+    <div class="form-group">
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :password_confirmation %>
-      <%= f.text_field :password_confirmation, class: 'form-control' %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.submit %>

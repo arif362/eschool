@@ -1,6 +1,15 @@
 class User < ActiveRecord::Base
-  has_many :course_klass_lists
-  USER_ROLE = ['Parent', 'Teacher', 'Student']
+  belongs_to :school
+  has_many :courses
+  has_many :klasses
+  #USER_ROLE = ['Parent', 'Teacher', 'Student']
+  USER_ROLE = {
+      student: 'Student',
+      teacher: 'Teacher',
+      parent: 'Parent',
+
+
+  }
   validates :user_name, uniqueness: true
   validates :password, confirmation: true
   attr_reader :password
@@ -21,7 +30,7 @@ class User < ActiveRecord::Base
 
   def User.authenticate(user_name, password)
     if user= find_by_user_name(user_name)
-      if user.hashed_password == encrypt_password(password,user.salt)
+      if user.hashed_password == encrypt_password(password, user.salt)
         user
       end
     end
@@ -31,11 +40,7 @@ class User < ActiveRecord::Base
     self.first_name + self.last_name
   end
 
-  def user_role
-    self.role
-  end
-
-      private
+  private
   def generate_salt
     self.salt= self.object_id.to_s + rand.to_s
   end
