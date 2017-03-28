@@ -1,6 +1,6 @@
 class SchoolsController < ApplicationController
   skip_before_filter :authorize
-  before_action :set_school, only: [:show]
+  before_action :set_school, only: [:show,:edit,:update]
   def index
     @schools=School.all
   end
@@ -12,12 +12,25 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       if @school.save
         KlassNotification.school_created(@school).deliver
-        format.html {redirect_to schools_path, notice: 'A Confirmation Message sent to your Gmail Account. Please Check'}
+        format.html {redirect_to school_path(@school), notice: 'A Confirmation Message sent to your Gmail Account. Please Check'}
       end
     end
   end
   def show
   end
+  def edit
+  end
+  def update
+    respond_to do |format|
+     if @school.update(school_params)
+      format.html {redirect_to school_path(@school), notice: 'Updated Successfully'}
+     else
+      format.html {redirect_to edit_school_path(@school), notice: 'faild to update. Try again'}
+     end
+
+    end
+  end
+
 
   private
 

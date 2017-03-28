@@ -3,12 +3,12 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
-    @courses= Course.all
-    @courses=Course.paginate(:page => params[:page], :per_page => 10)
+    @courses= current_school.courses.all
+    @courses=current_school.courses.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new
-    @course= Course.new
+    @course= current_school.courses.new
   end
 
   def create
@@ -46,7 +46,7 @@ class CoursesController < ApplicationController
 
   private
   def set_course
-    @course=Course.find(params[:id])
+    @course=current_school.courses.find(params[:id])
   end
 
   def course_params

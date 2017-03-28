@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   belongs_to :school
-  has_many :courses
-  has_many :klasses
   #USER_ROLE = ['Parent', 'Teacher', 'Student']
   USER_ROLE = {
       student: 'Student',

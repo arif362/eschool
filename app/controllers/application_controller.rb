@@ -17,8 +17,6 @@ class ApplicationController < ActionController::Base
   def current_school
     School.find(session[:school_id])
   rescue ActiveRecord::RecordNotFound
-    school = School.find(params[:id])
-    session[:school_id]=school.id
   end
 
   def current_course

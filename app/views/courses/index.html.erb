@@ -9,7 +9,6 @@
     <tr>
       <th>Serial</th>
       <th>Course Title</th>
-      <th></th>
       <th>Author of Course</th>
       <th>Action</th>
     </tr>
@@ -21,11 +20,6 @@
         <tr>
           <td><%= serial_no %></td>
           <td><%= course.title %></td>
-          <td>
-            <%# if course.user_role == 'Student'%>
-            <%= link_to 'create a class', new_klass_path%>
-                <%# end %>
-          </td>
           <td><%= course.author %></td>
           <td>
             <%= link_to '', course_path(course), class: 'fa fa-eye', title: 'View' %>
@@ -38,5 +32,4 @@
   </table>
   <%= will_paginate @courses , class: 'pull-right'%>
   <%= link_to 'Back to Class Routine', klasses_path%>
-  <%= link_to 'logout', logout_path, method: :delete%>
 </div>

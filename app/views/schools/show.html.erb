@@ -1,5 +1,14 @@
 <div class="container">
-  <h2 class="page-header">Welcome To <b><%= @school.name%></b></h2>
-
-
+  <h2 class="page-header">Profile of <b><%= @school.name%></b></h2>
+<div>
+  <ul>
+    <li><b>School Name:</b><%= @school.name%></li>
+    <li><b>Admin Name:</b><%= @school.admin%></li>
+    <li><b>Address:</b><%= @school.address%></li>
+    <li><b>E-mail:</b><%= @school.email%></li>
+    <li><b>Registration Number:</b><%= @school.registration_no%></li>
+    <li><b>Mobile:</b><%= @school.mobile%></li>
+  </ul>
+</div>
+<%= link_to 'Edit Profile', edit_school_path, class: 'btn btn-default'%>
 </div>

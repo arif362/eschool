@@ -3,20 +3,20 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy,:invite]
 
   def index
-    @users= User.all
+    @users= current_school.users.all
   end
 
   def student_list
-    @users= User.all.where(role: User::USER_ROLE[:student])
+    @users= current_school.users.all.where(role: User::USER_ROLE[:student])
   end
 
   def teacher_list
    # @users=User.all.where(role: 'Teacher')
-    @users=User.all.where(role: User::USER_ROLE[:teacher])
+    @users=current_school.users.all.where(role: User::USER_ROLE[:teacher])
   end
 
   def parent_list
-    @parents=User.all.where("role='Parent'")
+    @parents=current_school.users.all.where("role='Parent'")
   end
 
   def new
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user=User.new(user_params)
+    @user=current_school.users.new(user_params)
     respond_to do |format|
       if @user.save
         KlassNotification.user_created(@user).deliver

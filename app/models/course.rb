@@ -1,7 +1,6 @@
 class Course < ActiveRecord::Base
  belongs_to :school
  has_many :klasses
- belongs_to :user
 
   def selected_course
     courses=Course.all
