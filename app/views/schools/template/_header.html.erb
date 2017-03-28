@@ -15,39 +15,41 @@
             <li><%= link_to 'Courses', courses_path %></li>
             <li><%= link_to 'Classes', klasses_path %></li>
             <li><%= link_to 'Users ', users_path %></li>
-            <li>
-              <%= link_to 'Profile', school_path(session[:school_id]) %></li>
-            <li><%= link_to 'Logout ', logout_url, method: :delete %></li>
-
-        <% else %>
-            <% if session[:user_id] %>
-                <li class="active"><%= link_to 'Home', schools_path %></li>
-                <li><%= link_to 'Courses', courses_path %></li>
-                <li><%= link_to 'Classes', klasses_path %></li>
-                <li><%= link_to 'Users', teacher_list_users_path %></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= image_tag('arif.jpg', width: 40, class: 'img-circle') %>
-                    <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
+            <!--<li><%#= link_to 'Profile', school_path(session[:school_id]) %></li>-->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= image_tag('arif.jpg', width: 40, class: 'img-circle') %>
+                <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <% if current_user.present? %>
                     <li><%= link_to 'Profile', user_path(session[:user_id]) %></li>
-                    <li><%= link_to 'Logout ', logout_url, method: :delete %></li>
-                  </ul>
-                </li>
+                <% else %>
+                    <li><%= link_to 'Profile', school_path(session[:school_id]) %></li>
+                <% end %>
+                <li><%= link_to 'Logout ', logout_url, method: :delete %></li>
+              </ul>
+            </li>
+            <li>
+              <% if current_user.present? %>
+                  <b style="color: #B00100"><%= current_user.full_name %>;<%= current_user.role %> of <%= current_school.name%></b>
             <% else %>
-                <li class="active"><%= link_to 'Home', schools_path %></li>
-                <li><%= link_to 'Courses', new_user_path %></li>
-                <li><%= link_to 'Classes', new_user_path %></li>
-                <li><%= link_to 'Contact' %></li>
-                <li><%= link_to 'Sign Up', new_user_path %></li>
-                <li><%= link_to 'Create A School ', new_school_path %></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><%= link_to 'Admin Login', admin_login_url %></li>
-                    <li><%= link_to 'User Login', login_url %></li>
-                  </ul>
-                </li>
+                <b style="color: #B00100"><%= current_school.admin %>;Admin of <%= current_school.name%></b>
             <% end %>
+            </li>
+        <% else %>
+            <li class="active"><%= link_to 'Home', schools_path %></li>
+            <li><%= link_to 'Courses', new_user_path %></li>
+            <li><%= link_to 'Classes', new_user_path %></li>
+            <li><%= link_to 'Contact' %></li>
+            <li><%= link_to 'Sign Up', new_user_path %></li>
+            <li><%= link_to 'Create A School ', new_school_path %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Admin Login', admin_login_url %></li>
+                <li><%= link_to 'User Login', login_url %></li>
+              </ul>
+            </li>
+
         <% end %>
       </ul>
     </div>

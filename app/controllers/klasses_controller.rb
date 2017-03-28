@@ -7,7 +7,7 @@ class KlassesController < ApplicationController
   end
 
   def new
-    @klass=current_school.klasses.new
+    @klass=Klass.new
   end
 
   def create

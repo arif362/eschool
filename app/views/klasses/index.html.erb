@@ -1,6 +1,12 @@
 <div class="container">
   <h2 class="page-header">Class Routine</h2>
-  <%= link_to 'Create Class', new_klass_path, class: 'fa fa-plus-circle btn btn-default' %>
+  <% if current_user.present? %>
+      <% if current_user.role == User::USER_ROLE[:teacher] %>
+          <%= link_to 'Create Class', new_klass_path, class: 'fa fa-plus-circle btn btn-default' %>
+      <% end %>
+  <% else %>
+      <%= link_to 'Create Class', new_klass_path, class: 'fa fa-plus-circle btn btn-default' %>
+  <% end %>
   <b><%= notice %></b>
   <table class="table table-responsive">
     <thead>
@@ -12,7 +18,14 @@
       <th>Teacher</th>
       <th>E-mail</th>
       <th>Duration</th>
-      <th>Action</th>
+      <% if current_user.present? %>
+          <% unless current_user.role== User::USER_ROLE[:student] || User::USER_ROLE[:parent] %>
+              <th>Action</th>
+          <% end %>
+      <% else %>
+          <th>Action</th>
+      <% end %>
+
     </tr>
     </thead>
     <tbody>
@@ -21,17 +34,28 @@
         <% serial_no += 1 %>
         <tr>
           <td><%= serial_no %></td>
-          <td><%= ''%></td>
+          <td><%= '' %></td>
           <td><%= klass.room_no %></td>
           <td><%= klass.time %></td>
           <td><%= klass.teacher %></td>
           <td><%= klass.email %></td>
           <td><%= klass.duration %></td>
-          <td>
-            <%= link_to '', klass_path(klass), class: 'fa fa-eye ', title: 'View' %>
-            <%= link_to '', edit_klass_path(klass), class: 'fa fa-edit', title: 'Edit' %>
-            <%= link_to '', klass_path(klass), method: :delete, class: 'fa fa-trash-o', title: 'Delete' %>
-          </td>
+          <% if current_user.present? %>
+              <% unless current_user.role== User::USER_ROLE[:student] || User::USER_ROLE[:parent] %>
+                  <td>
+                    <%= link_to '', klass_path(klass), class: 'fa fa-eye ', title: 'View' %>
+                    <%= link_to '', edit_klass_path(klass), class: 'fa fa-edit', title: 'Edit' %>
+                    <%= link_to '', klass_path(klass), method: :delete, class: 'fa fa-trash-o', title: 'Delete' %>
+                  </td>
+              <% end %>
+          <% else %>
+              <td>
+                <%= link_to '', klass_path(klass), class: 'fa fa-eye ', title: 'View' %>
+                <%= link_to '', edit_klass_path(klass), class: 'fa fa-edit', title: 'Edit' %>
+                <%= link_to '', klass_path(klass), method: :delete, class: 'fa fa-trash-o', title: 'Delete' %>
+              </td>
+          <% end %>
+
         </tr>
     <% end %>
     </tbody>

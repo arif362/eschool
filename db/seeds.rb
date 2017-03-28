@@ -6,7 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-#Course.delete_all
+# Course.delete_all
+# School.delete_all
+# User.delete_all
+# Klass.delete_all
 # (1..25).each do
 #   Course.create(title: Faker::Book.title, author: Faker::Book.author)
 # end

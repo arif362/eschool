@@ -1,7 +1,12 @@
 <div class="container">
   <%= notice %>
   <h2 class="page-header">All Users List</h2>
-  <%= link_to 'Add User', new_user_path, class: 'btn btn-default pull-right fa fa-plus-circle'%>
+  <% unless current_user.present? %>
+      <%= link_to 'Add User', new_user_path, class: 'btn btn-default pull-right fa fa-plus-circle' %>
+  <% end %>
+
+  <%= link_to 'Invite Your Children',new_invitation_path, class: 'btn btn-primary pull-right' %>
+
   <%= link_to 'Students List', student_list_users_path, class: 'btn btn-default' %>
   <%= link_to 'Teachers List', teacher_list_users_path, class: 'btn btn-default' %>
   <%= link_to 'Parents List', parent_list_users_path, class: 'btn btn-default' %>
@@ -13,8 +18,9 @@
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
-      <th></th>
-      <th>Action</th>
+      <% unless current_user.present? %>
+          <th>Action</th>
+      <% end %>
     </tr>
     </thead>
     <tbody>
@@ -25,16 +31,15 @@
           <td><%= user.full_name %></td>
           <td><%= user.email %></td>
           <td><%= user.role %></td>
-          <td>
-            <% unless user.role =='Parent' %>
-                <%= link_to 'Send Invitation', invite_user_path(user) %>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to '', user_path(user), class: 'fa fa-eye' %>
-            <%= link_to '', edit_user_path(user), class: 'fa fa-edit' %>
-            <%= link_to '', user_path(user), method: :delete, class: 'fa fa-trash-o' %>
-          </td>
+          <% unless current_user.present? %>
+              <td>
+                <%= link_to '', user_path(user), class: 'fa fa-eye' %>
+                <%= link_to '', edit_user_path(user), class: 'fa fa-edit' %>
+                <%= link_to '', user_path(user), method: :delete, class: 'fa fa-trash-o' %>
+              </td>
+          <% end %>
+
+
         </tr>
     <% end %>
     </tbody>

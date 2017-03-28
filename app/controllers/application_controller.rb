@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   before_filter :authorize
   protect_from_forgery with: :exception
+  helper_method :current_school, :current_user
 
   private
 
@@ -17,15 +18,21 @@ class ApplicationController < ActionController::Base
   def current_school
     School.find(session[:school_id])
   rescue ActiveRecord::RecordNotFound
+    if current_user.present?
+      school = current_user.school
+      session[:school_id]=school.id
+      school
+    end
   end
 
   def current_course
     Course.find(session[:course_id])
   rescue ActiveRecord::RecordNotFound
   end
+
   def current_user
     User.find(session[:user_id])
-    rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound
   end
 
 

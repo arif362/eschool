@@ -11,26 +11,27 @@
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
-      <th></th>
-      <th>Action</th>
+      <% unless current_user.present? %>
+          <th>Action</th>
+      <% end %>
     </tr>
     </thead>
     <tbody>
-    <% serial_no=0%>
+    <% serial_no=0 %>
     <% @users.each do |user| %>
         <tr>
           <td><%= serial_no +=1 %></td>
           <td><%= user.full_name %></td>
           <td><%= user.email %></td>
           <td><%= user.role %></td>
-          <td>
-            <%= link_to 'Send invitation', invite_user_path(user) %>
-          </td>
-          <td>
-            <%= link_to '', user_path(user), class: 'fa fa-eye' %>
-            <%= link_to '', edit_user_path(user), class: 'fa fa-edit' %>
-            <%= link_to '', user_path(user), method: :delete, class: 'fa fa-trash-o' %>
-          </td>
+          <% unless current_user.present? %>
+              <td>
+                <%= link_to '', user_path(parent), class: 'fa fa-eye' %>
+                <%= link_to '', edit_user_path(parent), class: 'fa fa-edit' %>
+                <%= link_to '', user_path(parent), method: :delete, class: 'fa fa-trash-o' %>
+              </td>
+          <% end %>
+
         </tr>
     <% end %>
     </tbody>

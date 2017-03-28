@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :authorize
-  before_action :set_user, only: [:show, :edit, :update, :destroy,:invite]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :invite]
 
   def index
     @users= current_school.users.all
@@ -11,12 +11,12 @@ class UsersController < ApplicationController
   end
 
   def teacher_list
-   # @users=User.all.where(role: 'Teacher')
+    # @users=User.all.where(role: 'Teacher')
     @users=current_school.users.all.where(role: User::USER_ROLE[:teacher])
   end
 
   def parent_list
-    @parents=current_school.users.all.where("role='Parent'")
+    @parents=current_school.users.all.where(role: User::USER_ROLE[:parent])
   end
 
   def new
@@ -24,11 +24,18 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user=current_school.users.new(user_params)
+    if current_school.present?
+      @user=current_school.users.build(user_params)
+    else
+      @user=User.new(user_params)
+    end
+
     respond_to do |format|
       if @user.save
         KlassNotification.user_created(@user).deliver
-        format.html { redirect_to schools_path, notice: 'A Confirmation Message sent to your Gmail Account. Please Check' }
+        format.html { redirect_to login_url, notice: 'A Confirmation Message sent to your Gmail Account. Please Check' }
+      else
+        format.html { render :new }
       end
     end
   end
@@ -61,10 +68,10 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :user_name, :email, :role, :password,:school_id, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :user_name, :email, :role, :password, :school_id, :password_confirmation)
   end
 
   def set_user
-    @user=User.find(params[:id])
+    @user=current_school.users.find(params[:id])
   end
 end
