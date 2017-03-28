@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :klasses
   resources :course_klass_lists
+  resources :invitations
   resources :schools
   resources :users do
     get :student_list, on: :collection
@@ -18,7 +19,6 @@ Rails.application.routes.draw do
   #   #post :add, on: :member
   # end
   resources :admin do
-     get :invite, on: :member
   end
 
   controller :sessions do
