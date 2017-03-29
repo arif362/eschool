@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   belongs_to :school
-  #USER_ROLE = ['Parent', 'Teacher', 'Student']
+  has_many :user_assign_courses
+  has_many :courses, through: :user_assign_courses
+
   USER_ROLE = {
       student: 'Student',
       teacher: 'Teacher',
@@ -37,6 +39,13 @@ class User < ActiveRecord::Base
   def full_name
     self.first_name + ' ' + self.last_name
   end
+
+  def self.student_for_assign
+    all_users = self.all
+    student = all_users.collect {|user| [user.full_name, user.id]}
+  end
+
+  USER_NAME=self.student_for_assign
 
   private
   def generate_salt

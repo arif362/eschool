@@ -13,6 +13,7 @@
       <th>Serial</th>
       <th>Course Title</th>
       <th>Author of Course</th>
+      <th></th>
       <% unless current_user.present? %>
           <th>Action</th>
       <% end %>
@@ -26,6 +27,13 @@
           <td><%= serial_no %></td>
           <td><%= course.title %></td>
           <td><%= course.author %></td>
+          <td>
+            <% if current_user.present? %>
+                <% if current_user.role==User::USER_ROLE[:teacher] %>
+                    <%= link_to 'Assign A Course To A Student', user_assign_courses_path(:course_id => course), method: :post ,class: 'btn btn-primary' %>
+                <% end %>
+            <% end %>
+          </td>
           <% unless current_user.present? %>
               <td>
                 <%= link_to '', course_path(course), class: 'fa fa-eye', title: 'View' %>

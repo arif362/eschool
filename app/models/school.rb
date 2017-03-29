@@ -2,6 +2,7 @@ class School < ActiveRecord::Base
   has_many :courses
   has_many :users
   has_many :klasses
+  has_many :user_assign_courses
   validate :email
   validates :password, confirmation: true
   attr_reader :password
