@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def teacher_list
-    # @users=User.all.where(role: 'Teacher')
     @users=current_school.users.all.where(role: User::USER_ROLE[:teacher])
   end
 
@@ -68,7 +67,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-      params.require(:user).permit(:first_name, :last_name, :user_name, :email, :role, :password, :school_id, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :user_name, :email, :role, :password, :school_id, :password_confirmation)
   end
 
   def set_user

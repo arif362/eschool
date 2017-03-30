@@ -1,0 +1,28 @@
+<div class="container">
+  <h2 class="page-header">All Assigned Courses for students</h2>
+  <%= link_to 'All Courses', courses_path, class: 'btn btn-default' %>
+  <%= link_to 'All Assigned Courses', user_assign_courses_path, class: 'btn btn-default' %>
+  <table class="table table-responsive table-hover">
+    <thead>
+    <tr>
+      <th>Serial No.</th>
+      <th>Course Name</th>
+      <th>Author</th>
+      <th>Assigned Student</th>
+      <th>Assigned by</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @assigned_courses.each do |assign_course| %>
+        <tr>
+          <td><%= assign_course.id%></td>
+          <td><%= assign_course.course.title%></td>
+          <td><%= assign_course.course.author%></td>
+          <td><%= assign_course.user.full_name if assign_course.user.present?%></td>
+          <td><%= assign_course.user.full_name if assign_course.user.present?%></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>

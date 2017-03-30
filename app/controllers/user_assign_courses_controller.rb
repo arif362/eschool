@@ -1,25 +1,32 @@
 class UserAssignCoursesController < ApplicationController
   skip_before_filter :authorize
 
+  def index
+    @assigned_courses= UserAssignCourse.all
+  end
+
   def new
-    @user_assign_course = UserAssignCourse.new
+    @course = Course.find_by_id(params[:course_id])
   end
 
   def create
-    @user=current_user
-    course = Course.find(params[:course_id])
-    @user_assign_course = @user.user_assign_courses.build(:course=> course)
-    respond_to do |format|
-      if @user_assign_course.save
-        format.html { redirect_to courses_path, notice: 'Course assigned successful' }
-      else
-        format.html { render :new }
+    @course = Course.find_by_id(params[:course_id])
+    begin
+      params[:student_ids].each do |student_id|
+        @course.user_assign_courses.build(user_id: student_id).save
       end
+      respond_to do |format|
+        format.html { redirect_to courses_path, notice: 'Successfully assigned' }
+      end
+    rescue
+      redirect_to new_user_assign_course_path(course_id: @course), notice: 'There is a problem of course assigning. Please check..'
     end
+
+
   end
 
   private
   def user_assign_course_params
-    params.require(:user_assign_course).permit(:user_id, :course_id)
+    params.require(:user_assign_course).permit(:course_id, :user_id)
   end
 end

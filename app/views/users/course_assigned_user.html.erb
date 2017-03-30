@@ -1,6 +1,6 @@
 <div class="container">
   <h2 class="page-header">Select student for assigning a student</h2>
-  <%= form_tag  user_assign_courses_path, method: :post do %>
+  <%= form_tag user_assign_courses_path, method: :post do %>
       <%= submit_tag 'Save',  class: 'btn btn-default pull-right' %>
       <table class="table table-responsive">
         <thead>
@@ -11,10 +11,10 @@
         </tr>
         </thead>
         <tbody>
-        <%= hidden_field_tag :course_id, @course.id %>
-        <% current_students.each do |student| %>
+        <% @students.each do |student| %>
             <tr>
               <td><%= check_box_tag 'student_ids[]', student.id, true %></td>
+              <% text_field_tag :@assign_course_id %>
               <td><%= student.full_name %></td>
               <td><%= student.email %></td>
             </tr>
