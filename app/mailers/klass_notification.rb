@@ -20,9 +20,10 @@ class KlassNotification < ApplicationMailer
     mail(to: user.email, subject: 'User Account Created successfully')
   end
 
-  def invite_created(user)
-    @user=user
-    mail(to: user.email, subject: 'Welcome To E-School')
+  def invite_created(invitation)
+    @invitation=invitation
+    mail(to: invitation.email, subject: 'Welcome To E-School')
   end
+
 
 end

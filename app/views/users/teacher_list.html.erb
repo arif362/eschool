@@ -1,5 +1,12 @@
 <div class="container">
   <h2 class="page-header">All Teachers List</h2>
+  <% if current_user.present? %>
+      <% if current_user.role== User::USER_ROLE[:teacher] %>
+          <%= link_to 'Invite Your Children', new_invitation_path, class: 'btn btn-primary pull-right' %>
+      <% end %>
+  <% else %>
+      <%= link_to 'Invite Your Children', new_invitation_path, class: 'btn btn-primary pull-right' %>
+  <% end %>
   <%= link_to 'Students List', student_list_users_path, class: 'btn btn-default' %>
   <%= link_to 'Teachers List', teacher_list_users_path, class: 'btn btn-default' %>
   <%= link_to 'Parents List', parent_list_users_path, class: 'btn btn-default' %>
@@ -26,9 +33,9 @@
           <td><%= user.role %></td>
           <% unless current_user.present? %>
               <td>
-                <%= link_to '', user_path(parent), class: 'fa fa-eye' %>
-                <%= link_to '', edit_user_path(parent), class: 'fa fa-edit' %>
-                <%= link_to '', user_path(parent), method: :delete, class: 'fa fa-trash-o' %>
+                <%= link_to '', user_path(user), class: 'fa fa-eye' %>
+                <%= link_to '', edit_user_path(user), class: 'fa fa-edit' %>
+                <%= link_to '', user_path(user), method: :delete, class: 'fa fa-trash-o' %>
               </td>
           <% end %>
 

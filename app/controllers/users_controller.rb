@@ -40,12 +40,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def invite
-    respond_to do |format|
-      KlassNotification.invite_created(@user).deliver
-      format.html { redirect_to users_path, notice: 'Invitation Sent to Your User' }
-    end
-  end
+  # def invite
+  #   respond_to do |format|
+  #     KlassNotification.invite_created(@user).deliver
+  #     format.html { redirect_to users_path, notice: 'Invitation Sent to Your User' }
+  #   end
+  # end
 
   def show
   end

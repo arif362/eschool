@@ -9,6 +9,7 @@ class InvitationsController < ApplicationController
     @invitation= Invitation.new(invitation_params)
     respond_to do |format|
       if @invitation.save
+        KlassNotification.invite_created(@invitation).deliver
         format.html {redirect_to users_path, notice: 'Your invitation sent successfully'}
         else
         format.html {render :new}

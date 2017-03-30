@@ -2,10 +2,15 @@
   <%= notice %>
   <h2 class="page-header">All Users List</h2>
   <% unless current_user.present? %>
-      <%= link_to 'Add User', new_user_path, class: 'btn btn-default pull-right fa fa-plus-circle' %>
+      <%= link_to 'Add User', new_user_path, class: 'btn btn-default pull-right fa fa-plus-circle btn-lg' %>
   <% end %>
-
-  <%= link_to 'Invite Your Children',new_invitation_path, class: 'btn btn-primary pull-right' %>
+  <% if current_user.present? %>
+      <% if current_user.role== User::USER_ROLE[:teacher] %>
+          <%= link_to 'Invite Your Children', new_invitation_path, class: 'btn btn-primary pull-right' %>
+      <% end %>
+  <% else %>
+      <%= link_to 'Invite Your Children', new_invitation_path, class: 'btn btn-primary pull-right' %>
+  <% end %>
 
   <%= link_to 'Students List', student_list_users_path, class: 'btn btn-default' %>
   <%= link_to 'Teachers List', teacher_list_users_path, class: 'btn btn-default' %>
