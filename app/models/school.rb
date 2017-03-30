@@ -8,13 +8,13 @@ class School < ActiveRecord::Base
   attr_accessor :password_confirmation
   validate :password_must_be_present
 
-  def school_list
-    schools= School.all
+  def self.school_list
+    schools= self.all
     school_names =schools.collect { |school| [school.name, school.id] }
   end
 
-  all_school = self.new
-  USER_SCHOOL = all_school.school_list
+  #all_school = self.new
+  USER_SCHOOL = self.school_list
 
   def password=(password)
     @password=password
