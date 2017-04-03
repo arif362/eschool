@@ -3,9 +3,9 @@
   <%= link_to 'All Assigned Courses', user_assign_courses_path, class: 'btn btn-default' %>
   <h2 class="page-header">All Assigned Courses for students</h2>
 
-  <%= form_tag '', method: :get, remote:true do %>
+  <%= form_tag '', method: 'get', remote:true do %>
 
-      <%= select_tag :user, options_for_select(@users.collect{|student| [student.full_name, student.id]}, params[:user]), class:' btn btn-default ' , prompt:'All Students'  %>
+      <%= select_tag :user_id, options_for_select(@users.collect{|student| [student.full_name, student.id]}, params[:user_id]), class:' btn btn-default ' , prompt:'All Students'  %>
       <%= submit_tag 'Search' , class:'btn btn-primary btn-md' %>
   <% end %>
 <div id="assigned_courses">

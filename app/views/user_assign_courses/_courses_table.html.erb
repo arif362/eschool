@@ -5,16 +5,15 @@
       <th>Serial No.</th>
       <th>Course Name</th>
       <th>Author</th>
-      <!--<th>Assigned Student</th>-->
     </tr>
     </thead>
     <tbody>
+    <% serial_no=0%>
     <% courses.each do |course| %>
         <tr>
-          <td><%= course.id%></td>
-          <td><%= course.title%></td>
-          <td><%=course.author%></td>
-          <!--<td><%#=course.users.first_name if course.users.present?%></td>-->
+          <td><%= serial_no +=1 %></td>
+          <td><%= course.title %></td>
+          <td><%= course.author %></td>
         </tr>
     <% end %>
     </tbody>

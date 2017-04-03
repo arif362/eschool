@@ -23,6 +23,7 @@ class UsersController < ApplicationController
       @user = current_school.users.new
     else
       @user=User.new
+      @schools=School.all
     end
   end
 
@@ -36,7 +37,7 @@ class UsersController < ApplicationController
       if @user.save
         KlassNotification.user_created(@user).deliver
         if session[:school_id].present?
-          format.html { redirect_to users_path, notice: 'A Confirmation Message sent to his/her Gmail Account. Please Check' }
+          format.html { redirect_to users_path, notice: 'A Confirmation Message sent to his/her Gmail Account. Login your email and password' }
         else
           format.html { redirect_to login_path, method: :post, notice: 'A Confirmation Message sent to your Gmail Account. Please Check' }
         end
@@ -45,13 +46,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
-  # def invite
-  #   respond_to do |format|
-  #     KlassNotification.invite_created(@user).deliver
-  #     format.html { redirect_to users_path, notice: 'Invitation Sent to Your User' }
-  #   end
-  # end
 
   def show
   end

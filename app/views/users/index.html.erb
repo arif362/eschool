@@ -4,7 +4,7 @@
       <%= link_to 'Add User', new_user_path, class: 'btn btn-default pull-right fa fa-plus-circle btn-lg' %>
   <% end %>
   <% if current_user.present? %>
-      <% if current_user.role== User::USER_ROLE[:teacher] %>
+      <% unless current_user.role== User::USER_ROLE[:student]  %>
           <%= link_to 'Invite Your Children', new_invitation_path, class: 'btn btn-primary pull-right' %>
       <% end %>
   <% else %>

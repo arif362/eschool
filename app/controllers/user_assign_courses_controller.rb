@@ -5,7 +5,7 @@ class UserAssignCoursesController < ApplicationController
     @assigned_courses= UserAssignCourse.all
     @teachers= current_school.users.where(role: User::USER_ROLE[:teacher])
     @users=current_school.users.where(role: User::USER_ROLE[:student])
-    @courses= current_school.courses
+    @courses= Course.search(current_school, params[:user_id])
     respond_to do |format|
       format.html
       format.js

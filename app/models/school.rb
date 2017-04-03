@@ -3,19 +3,12 @@ class School < ActiveRecord::Base
   has_many :users
   has_many :klasses
   has_many :user_assign_courses
-  validate :email
+  validates :email, uniqueness: true
   validates :password, confirmation: true
   attr_reader :password
   attr_accessor :password_confirmation
   validate :password_must_be_present
 
-  def self.school_list
-    schools= self.all
-    school_names =schools.collect { |school| [school.name, school.id] }
-  end
-
-  #all_school = self.new
-  USER_SCHOOL = self.school_list
 
   def password=(password)
     @password=password
