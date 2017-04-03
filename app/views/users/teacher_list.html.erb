@@ -1,16 +1,16 @@
 <div class="container">
-  <h2 class="page-header">All Teachers List</h2>
   <% if current_user.present? %>
       <% if current_user.role== User::USER_ROLE[:teacher] %>
           <%= link_to 'Invite Your Children', new_invitation_path, class: 'btn btn-primary pull-right' %>
       <% end %>
   <% else %>
-      <%= link_to 'Invite Your Children', new_invitation_path, class: 'btn btn-primary pull-right' %>
+      <%= link_to 'Send an Invition', new_invitation_path, class: 'btn btn-primary pull-right' %>
   <% end %>
   <%= link_to 'Students List', student_list_users_path, class: 'btn btn-default' %>
   <%= link_to 'Teachers List', teacher_list_users_path, class: 'btn btn-default' %>
   <%= link_to 'Parents List', parent_list_users_path, class: 'btn btn-default' %>
   <%= link_to 'All Users List', users_path, class: 'btn btn-default' %>
+  <h2 class="page-header">All Teachers List</h2>
   <table class="table table-responsive">
     <thead>
     <tr>

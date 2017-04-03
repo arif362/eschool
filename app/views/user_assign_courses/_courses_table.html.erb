@@ -1,0 +1,22 @@
+<div>
+  <table class="table table-responsive table-hover">
+    <thead>
+    <tr>
+      <th>Serial No.</th>
+      <th>Course Name</th>
+      <th>Author</th>
+      <!--<th>Assigned Student</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <% courses.each do |course| %>
+        <tr>
+          <td><%= course.id%></td>
+          <td><%= course.title%></td>
+          <td><%=course.author%></td>
+          <!--<td><%#=course.users.first_name if course.users.present?%></td>-->
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

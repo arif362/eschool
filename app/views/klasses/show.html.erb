@@ -4,7 +4,7 @@
   <ul>
     <li><b>Room No. :</b> <%= @klass.room_no %></li>
     <li><b>Time :</b> <%= @klass.time %></li>
-    <li><b>Teacher :</b> <%= @klass.teacher %></li>
+    <li><b>Teacher :</b> <%= @klass.user.full_name %></li>
     <li><b>Duration :</b> <%= @klass.duration %></li>
   </ul>
 <%= link_to 'Back to Class Routine', klasses_path%>

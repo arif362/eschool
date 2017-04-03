@@ -5,7 +5,7 @@
     </div>
     <div class="form-group">
       <%= f.label :course %>
-      <%= f.select :course_id, Course::COURSE_NAMES, prompt: 'Select a Course', class: 'form-control' %>
+      <%= f.select :course_id, options_for_select(@courses.collect{|course| [course.title, course.id]}, f.object.course_id), prompt: 'Select a Course', class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :room_no %>
@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
       <%= f.label :teacher, 'Teacher Name' %>
-      <%= f.text_field :teacher, class: 'form-control' %>
+      <%= f.select :user_id, options_for_select(@users.collect{|user| [user.full_name, user.id]}, f.object.user_id), prompt: 'Select a Teacher', class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :email, 'Teacher E-mail' %>

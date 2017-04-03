@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :school
+  has_many :klasses
   has_many :user_assign_courses
   has_many :courses, through: :user_assign_courses
 

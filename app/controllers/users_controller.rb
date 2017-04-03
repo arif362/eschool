@@ -19,7 +19,11 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    if current_school.present?
+      @user = current_school.users.new
+    else
+      @user=User.new
+    end
   end
 
   def create
@@ -28,11 +32,14 @@ class UsersController < ApplicationController
     else
       @user=User.new(user_params)
     end
-
     respond_to do |format|
       if @user.save
         KlassNotification.user_created(@user).deliver
-        format.html { redirect_to login_url, notice: 'A Confirmation Message sent to your Gmail Account. Please Check' }
+        if session[:school_id].present?
+          format.html { redirect_to users_path, notice: 'A Confirmation Message sent to his/her Gmail Account. Please Check' }
+        else
+          format.html { redirect_to login_path, method: :post, notice: 'A Confirmation Message sent to your Gmail Account. Please Check' }
+        end
       else
         format.html { render :new }
       end

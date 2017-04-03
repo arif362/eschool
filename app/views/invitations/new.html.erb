@@ -1,5 +1,10 @@
 <div class="container">
-  <h2 class="page-header">To send an E-mail to your Children put his/her E-mail address</h2>
+  <% if session[:school_id].present?%>
+      <h2 class="page-header">To send an invitation to user put his/her E-mail address</h2>
+  <% else %>
+      <h2 class="page-header">To send an invitation to your children put his/her E-mail address</h2>
+  <% end %>
+
   <%= render 'form'%>
 
 </div>

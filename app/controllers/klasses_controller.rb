@@ -8,6 +8,8 @@ class KlassesController < ApplicationController
 
   def new
     @klass=Klass.new
+    @courses= current_school.courses
+    @users=current_school.users.where(role: User::USER_ROLE[:teacher])
   end
 
   def create
@@ -46,6 +48,6 @@ class KlassesController < ApplicationController
   end
 
   def klass_params
-    params.require(:klass).permit(:time, :course_id, :room_no, :place, :teacher, :email, :duration)
+    params.require(:klass).permit(:time, :course_id, :room_no, :place, :user_id, :email, :duration)
   end
 end
