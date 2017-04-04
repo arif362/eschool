@@ -5,13 +5,12 @@ class Course < ActiveRecord::Base
   has_many :user_assign_courses
   has_many :users, through: :user_assign_courses
 
-  def self.search(current_school, user)
-    user_id = user
+  def self.search(current_school, user_id)
     if user_id.present?
       user=User.find_by_id(user_id)
-      courses= user.courses
+      user.courses
     else
-      courses=current_school.courses
+      current_school.courses
     end
 
   end
