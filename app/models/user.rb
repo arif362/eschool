@@ -25,11 +25,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def User.encrypt_password(password, salt)
+  def self.encrypt_password(password, salt)
     Digest::SHA1.hexdigest(password + 'wibble' + salt)
   end
 
-  def User.authenticate(user_name, password)
+  def self.authenticate(user_name, password)
     if user= find_by_user_name(user_name)
       if user.hashed_password == encrypt_password(password, user.salt)
         user
@@ -40,13 +40,6 @@ class User < ActiveRecord::Base
   def full_name
     self.first_name + ' ' + self.last_name
   end
-
-  def self.student_for_assign
-    all_users = self.all
-    student = all_users.collect {|user| [user.full_name, user.id]}
-  end
-
-  USER_NAME=self.student_for_assign
 
   private
   def generate_salt
