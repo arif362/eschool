@@ -35,14 +35,14 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       if @user.save
-        KlassNotification.user_created(@user).deliver
+        KlassNotification.user_created(@user).deliver_now
         if session[:school_id].present?
           format.html { redirect_to users_path, notice: 'A Confirmation Message sent to his/her Gmail Account. Login your email and password' }
         else
           format.html { redirect_to login_path, method: :post, notice: 'A Confirmation Message sent to your Gmail Account. Please Check' }
         end
       else
-        format.html { render :new }
+        format.html { redirect_to new_user_path, notice: 'Please enter your details correctly.' }
       end
     end
   end

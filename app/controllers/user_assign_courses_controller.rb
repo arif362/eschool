@@ -3,8 +3,8 @@ class UserAssignCoursesController < ApplicationController
 
   def index
     # @assigned_courses= UserAssignCourse.all
-   # @teachers= current_school.users.where(role: User::USER_ROLE[:teacher])
-   # @users=current_school.users.where(role: User::USER_ROLE[:student])
+    # @teachers= current_school.users.where(role: User::USER_ROLE[:teacher])
+    @users=current_school.users.where(role: User::USER_ROLE[:student])
     @courses= Course.search(current_school, params[:user_id]).distinct
     respond_to do |format|
       format.html
@@ -28,12 +28,6 @@ class UserAssignCoursesController < ApplicationController
     rescue
       redirect_to new_user_assign_course_path(course_id: @course), notice: 'There is a problem of course assigning. Please check..'
     end
-
-
   end
 
-  private
-  def user_assign_course_params
-    params.require(:user_assign_course).permit(:course_id, :user_id)
-  end
 end

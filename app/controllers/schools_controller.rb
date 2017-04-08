@@ -14,10 +14,10 @@ class SchoolsController < ApplicationController
     @school = School.new(school_params)
     respond_to do |format|
       if @school.save
-        KlassNotification.school_created(@school).deliver
+        KlassNotification.school_created(@school).deliver_now
         format.html { redirect_to admin_login_url, notice: 'A Confirmation Message sent to your Gmail Account. Please Check' }
       else
-        format.html {render :new, notice:'Failed to Sign Up for this School, Try again.'}
+        format.html { redirect_to new_school_path, notice: 'Failed to Sign Up for this School, Try again.' }
       end
     end
   end
@@ -32,8 +32,6 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       if @school.update(school_params)
         format.html { redirect_to school_path(@school), notice: 'Updated Successfully' }
-      else
-        format.html { redirect_to edit_school_path(@school), notice: 'faild to update. Try again' }
       end
 
     end

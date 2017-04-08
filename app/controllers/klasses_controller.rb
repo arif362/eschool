@@ -3,7 +3,7 @@ class KlassesController < ApplicationController
   before_action :set_klass, only: [:show, :edit, :update, :destroy]
 
   def index
-    @klasses= current_school.klasses.all
+    @klasses= current_school.klasses
   end
 
   def new

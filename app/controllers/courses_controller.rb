@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def index
-    @courses=current_school.courses.paginate(:page => params[:page], :per_page => 10)
+    @courses=current_school.courses
   end
 
   def new
@@ -29,8 +29,6 @@ class CoursesController < ApplicationController
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to course_path, notice: 'Course updated successfully' }
-      else
-        format.html { render edit }
       end
     end
   end
