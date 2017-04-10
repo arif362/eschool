@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  #pending "add some examples to (or delete) #{__FILE__}"
   before(:each) do
-    @user=User.create(first_name: 'Arif', last_name: 'Akash',user_name:'arif',email:'arif@gmail.com', password: 'abcde', salt: '12345', hashed_password: '1234')
+    @user=User.create(first_name: 'Arif', last_name: 'Akash', user_name: 'arif', email: 'arif@gmail.com', password: 'abcde', salt: '12345', hashed_password: '1234')
   end
 
   describe '#instance method password' do

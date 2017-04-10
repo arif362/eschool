@@ -2,12 +2,8 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
   before(:each) do
-    @user=FactoryGirl.create(:user)
     @school=FactoryGirl.create(:school)
-    #@session=FactoryGirl.create(:session)
-
-    # session[:user_id]=@user.id
-    # session[:school_id]=@school.id
+    @user=FactoryGirl.create(:user, school_id: @school.id)
   end
 
   describe 'get#new' do
@@ -18,12 +14,22 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe 'post#create' do
-    it 'should request to create action of Session Controller ' do
-      post :create, session: {user_name: Faker::Name.name, password: 'password'}
-      expect(response).to redirect_to(login_url)
+    context 'if authentication is valid' do
+      it 'should request to create action of Session Controller ' do
+        s_u_name=@user.user_name
+        post :create, user_name: s_u_name, password: 'password'
+        session[:user_id]=@user.id
+        expect(response).to redirect_to(user_path(@user))
+      end
+    end
+    context 'if authentication is not valid' do
+      it 'should request to create action of Session Controller ' do
+        post :create
+        session[:user_id]=@user.id
+        expect(response).to redirect_to(login_url)
+      end
     end
   end
-
 
   describe 'get#admin_login' do
     it 'should request to admin_login action of Session Controller ' do
@@ -33,10 +39,20 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe 'post#add' do
-    it 'should request to add action of Session Controller ' do
-      post :add, session: {user_name: Faker::Name.name, password: 'password'}
-      expect(response).to redirect_to(admin_login_url)
+    context 'if authentication is valid for school email' do
+      it 'should request to add action of Session Controller ' do
+        session_email_address=@school.email
+        post :add, email: session_email_address, password: 'password'
+        expect(response).to redirect_to(school_path(@school))
+      end
     end
+    context 'if authentication is not valid for school email' do
+      it 'should request to add action of Session Controller ' do
+        post :add, email: Faker::Internet.email, password: 'password'
+        expect(response).to redirect_to(admin_login_url)
+      end
+    end
+
   end
 
   describe 'delete#destroy' do

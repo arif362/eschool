@@ -19,6 +19,7 @@ RSpec.describe CoursesController, type: :controller do
     it 'should request to course controller new action' do
       get :new
       expect(response).to be_success
+      expect(assigns(:course)).to be_a_new(Course)
     end
   end
 
