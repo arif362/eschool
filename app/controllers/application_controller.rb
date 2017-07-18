@@ -5,15 +5,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_school, :current_user, :current_students
 
-  private
 
-  def current_klass
-    Klass.find(session[:klass_id])
-  rescue ActiveRecord::RecordNotFound
-    klass=Klass.create
-    session[:klass_id]=klass.id
-    klass
-  end
+  #
+  # def current_klass
+  #   Klass.find(session[:klass_id])
+  # rescue ActiveRecord::RecordNotFound
+  #   klass=Klass.create
+  #   session[:klass_id]=klass.id
+  #   klass
+  # end
 
   def current_school
     School.find(session[:school_id])
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     current_school.users.where(role: User::USER_ROLE[:student])
   end
 
-
+  private
   def authorize
     if School.find_by_id(session[:school_id])
       redirect_to school_path
